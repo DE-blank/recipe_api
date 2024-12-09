@@ -9,6 +9,7 @@ body {
   min-height: 100vh;
   flex-direction: column;
   padding-top: 20vh; /* Add padding to move content down */
+  font-size: 18px; /* Increase base font size */
 }
 
 .container {
@@ -19,11 +20,17 @@ body {
   display: flex;
   flex-direction: column;
   align-items: center; /* Center the content horizontally */
+  background-color: #ffffff; /* Add a white background to the container */
+  padding: 20px; /* Add padding inside the container */
+  border-radius: 8px; /* Add rounded corners to the container */
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Add a subtle shadow to the container */
 }
 
 h1 {
   margin-top: 10px; /* Reduce margin to move the heading up */
   margin-bottom: 10px; /* Reduce margin to move the heading closer to the input */
+  font-size: 2em; /* Increase font size for the heading */
+  color: #333333; /* Add a dark color to the heading */
 }
 
 #input {
@@ -44,10 +51,12 @@ button, .faq-button, .back-button {
   text-decoration: none; /* Remove underline from link */
   display: inline-block;
   margin-top: 10px; /* Add margin to separate buttons */
+  font-size: 1em; /* Ensure button text size matches body text size */
 }
 
 button:hover, .faq-button:hover, .back-button:hover {
   background-color: #218838;
+  color: white; /* Ensure text color remains white on hover */
 }
 
 #results {
@@ -56,7 +65,7 @@ button:hover, .faq-button:hover, .back-button:hover {
 }
 
 .recipe {
-  background-color: white;
+  background-color: #f9f9f9; /* Add a light background color to the recipe */
   padding: 15px;
   margin-bottom: 10px;
   border-radius: 4px;
@@ -66,10 +75,12 @@ button:hover, .faq-button:hover, .back-button:hover {
 
 .recipe h3 {
   margin-top: 0;
+  color: #333333; /* Add a dark color to the recipe titles */
 }
 
 .recipe h4 {
   margin-bottom: 5px;
+  color: #555555; /* Add a slightly lighter color to the subtitles */
 }
 
 .recipe ul {
@@ -79,6 +90,7 @@ button:hover, .faq-button:hover, .back-button:hover {
 
 .recipe p {
   margin: 5px 0;
+  color: #666666; /* Add a medium color to the recipe text */
 }
 
 .faq-button, .back-button {
@@ -88,17 +100,31 @@ button:hover, .faq-button:hover, .back-button:hover {
 }
 
 .faq-item {
-  background-color: white;
+  background-color: #f9f9f9; /* Add a light background color to the FAQ items */
   padding: 15px;
-  margin-bottom: 10px;
+  margin-bottom: 20px; /* Increase margin to add more space between FAQ items */
   border-radius: 4px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .faq-item h3 {
   margin-top: 0;
+  color: #333333; /* Add a dark color to the FAQ titles */
 }
 
 .faq-item p {
   margin: 5px 0;
+  color: #666666; /* Add a medium color to the FAQ text */
+}
+
+.faq-item a {
+  color: #28a745 !important; /* Match link color to button color */
+  text-decoration: none !important; /* Remove underline from links */
+  border-bottom: 1px solid #28a745 !important; /* Add a bottom border to links */
+  transition: color 0.3s, border-bottom-color 0.3s; /* Add transition for smooth hover effect */
+}
+
+.faq-item a:hover {
+  color: #218838 !important; /* Darken the link color on hover */
+  border-bottom-color: #218838 !important; /* Change the bottom border color on hover */
 }
