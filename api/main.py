@@ -1,6 +1,5 @@
 from flask import Flask, request, jsonify
 import psycopg2
-import os
 from flask_cors import CORS
 
 app = Flask(__name__)
@@ -63,4 +62,4 @@ def search():
         return jsonify({"error": str(e)}), 500
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run()
