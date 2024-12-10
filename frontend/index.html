@@ -5,13 +5,21 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Recipe Finder</title>
   <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
 </head>
 <body>
-  <a href="faq.html" class="faq-button">FAQ</a>
+  <a href="faq.html" class="faq-button">
+    <i class="fas fa-question-circle"></i> FAQ
+  </a>
   <h1>Recipe Finder</h1>
   <div class="container">
-    <input type="text" id="input" placeholder="Enter ingredients">
-    <button onclick="fetchData()">Search</button>
+    <div class="input-wrapper">
+      <label for="input">Enter ingredients:</label>
+      <input type="text" id="input" placeholder="Tomatoes, Chicken Breast, Garlic">
+    </div>
+    <button onclick="fetchData()">
+      <i class="fas fa-search"></i> Search
+    </button>
     
     <div id="results"></div>
   </div>

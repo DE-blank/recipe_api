@@ -33,8 +33,21 @@ h1 {
   color: #333333; /* Add a dark color to the heading */
 }
 
+.input-wrapper {
+  width: 100%; /* Ensure the wrapper takes up the full width */
+  display: flex;
+  flex-direction: column; /* Stack label and input vertically */
+  align-items: flex-start; /* Align items to the left */
+}
+
+label {
+  margin-bottom: 5px; /* Add margin below the label */
+  font-size: 1em; /* Set font size for the label */
+  color: #333333; /* Set color for the label */
+}
+
 #input {
-  width: 100%;
+  width: 100%; /* Ensure the input takes up the full width */
   padding: 10px;
   margin-bottom: 10px;
   border: 1px solid #ccc;
@@ -52,6 +65,10 @@ button, .faq-button, .back-button {
   display: inline-block;
   margin-top: 10px; /* Add margin to separate buttons */
   font-size: 1em; /* Ensure button text size matches body text size */
+}
+
+button i, .faq-button i {
+  margin-right: 5px; /* Add some space between the icon and the text */
 }
 
 button:hover, .faq-button:hover, .back-button:hover {
