@@ -1,6 +1,6 @@
 async function fetchData(){
   try{
-    const input = document.getElementById('input').value.toLowerCase();
+    const input = document.getElementById('input').value.toLowerCase().replace(/\s+/g, '');
     const response = await fetch(`http://127.0.0.1:5000/search?ingredients=${input}`);
     const data = await response.json();
     
