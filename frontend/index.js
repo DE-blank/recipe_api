@@ -1,14 +1,14 @@
+// funktion zum erhalt von daten von der API
 async function fetchData(){
   try{
+    // Eingabe holen, formatieren und API abrufen
     const input = document.getElementById('input').value.toLowerCase().replace(/\s+/g, '');
     const response = await fetch(`http://127.0.0.1:5000/search?ingredients=${input}`);
     const data = await response.json();
     
-    console.log('Fetched data:', data); // Log the data to see its structure
-
-    // Display data on the screen
+    // Ergebnisse anzeigen
     const resultsContainer = document.getElementById('results');
-    resultsContainer.innerHTML = ''; // Clear previous results
+    resultsContainer.innerHTML = ''; // letztes Ergebnis entfernen
 
     if (data.recipes && Array.isArray(data.recipes) && data.recipes.length > 0) {
       data.recipes.forEach(recipe => {
@@ -42,12 +42,14 @@ async function fetchData(){
         resultsContainer.appendChild(recipeElement);
       });
     } 
+    // Anzeigen wenn kein Ergebniss vorhanden
     else {
       const itemElement = document.createElement('div');
       itemElement.textContent = 'No results found';
       resultsContainer.appendChild(itemElement);
     }
   }
+  // Fehler behandlung
   catch(error){
     console.error('Error fetching data:', error);
     const resultsContainer = document.getElementById('results');
