@@ -46,9 +46,9 @@ def search():
             WHERE ingredients ILIKE ALL (%s)
             LIMIT 5
         """
-        ingredients_array = [f"%{ingredient}%" for ingredient in ingredients]  # Prepare the array with wildcards
+        ingredients_array = [f"%{ingredient}%" for ingredient in ingredients]  # Array mit Suchparametern erstellen
         cursor = conn.cursor()  # Cursor erstellen
-        cursor.execute(query, (ingredients_array,))  # Pass the array as a parameter
+        cursor.execute(query, (ingredients_array,))  # SQL-Abfrage ausführen
         results = cursor.fetchall()  # Ergebnisse abrufen
 
         if not results:
