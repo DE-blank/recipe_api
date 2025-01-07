@@ -1,14 +1,30 @@
 // funktion zum erhalt von daten von der API
-async function fetchData(){
-  try{
-    // Eingabe holen, formatieren und API abrufen
-    const input = document.getElementById('input').value.toLowerCase().replace(/\s+/g, '');
+async function fetchData() {
+  const searchButton = document.querySelector('button');
+  const resultsContainer = document.getElementById('results');
+  const input = document.getElementById('input').value.toLowerCase().replace(/\s+/g, '');
+
+  // Disable the search button and show loading spinner
+  searchButton.disabled = true;
+  searchButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Searching...';
+
+  try {
     const response = await fetch(`http://127.0.0.1:5000/search?ingredients=${input}`);
-    const data = await response.json();
     
-    // Ergebnisse anzeigen
-    const resultsContainer = document.getElementById('results');
-    resultsContainer.innerHTML = ''; // letztes Ergebnis entfernen
+    // Log response status for debugging
+    console.log('Response status:', response.status);
+
+    if (!response.ok) {
+      throw new Error('Network response was not ok');
+    }
+
+    const data = await response.json();
+
+    // Log response data for debugging
+    console.log('Response data:', data);
+
+    // Clear previous results
+    resultsContainer.innerHTML = '';
 
     if (data.recipes && Array.isArray(data.recipes) && data.recipes.length > 0) {
       data.recipes.forEach(recipe => {
@@ -41,18 +57,18 @@ async function fetchData(){
 
         resultsContainer.appendChild(recipeElement);
       });
-    } 
-    // Anzeigen wenn kein Ergebniss vorhanden
-    else {
-      const itemElement = document.createElement('div');
-      itemElement.textContent = 'No results found';
-      resultsContainer.appendChild(itemElement);
+    } else {
+      resultsContainer.innerHTML = '<p>No recipes found.</p>';
     }
-  }
-  // Fehler behandlung
-  catch(error){
+  } catch (error) {
     console.error('Error fetching data:', error);
-    const resultsContainer = document.getElementById('results');
-    resultsContainer.innerHTML = 'An error occurred while fetching data';
+    // Extend spinner animation duration and delay error message
+    searchButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Error...';
+    await new Promise(resolve => setTimeout(resolve, 3000)); // Extend duration by 3 seconds
+    resultsContainer.innerHTML = '<p>Error fetching data. Please try again later.</p>';
+  } finally {
+    // Re-enable the search button and reset its content
+    searchButton.disabled = false;
+    searchButton.innerHTML = '<i class="fas fa-search"></i> Search';
   }
 }
