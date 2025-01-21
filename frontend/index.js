@@ -1,4 +1,4 @@
-// funktion zum erhalt von daten von der API
+// Funktion zum Erhalt von Daten von der API
 async function fetchData() {
   const searchButton = document.querySelector('button');
   const resultsContainer = document.getElementById('results');
@@ -63,7 +63,7 @@ async function fetchData() {
   } catch (error) {
     console.error('Error fetching data:', error);
     // Extend spinner animation duration and delay error message
-    searchButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Error...';
+    searchButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Searching...';
     await new Promise(resolve => setTimeout(resolve, 3000)); // Extend duration by 3 seconds
     resultsContainer.innerHTML = '<p>Error fetching data. Please try again later.</p>';
   } finally {
@@ -72,3 +72,13 @@ async function fetchData() {
     searchButton.innerHTML = '<i class="fas fa-search"></i> Search';
   }
 }
+
+// Add event listener to the input field to trigger search on Enter key press
+document.getElementById('input').addEventListener('keypress', function(event) {
+  if (event.key === 'Enter') {
+    fetchData();
+  }
+});
+
+// Add event listener to the search button to trigger search on click
+document.querySelector('button').addEventListener('click', fetchData);
