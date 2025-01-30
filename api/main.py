@@ -1,9 +1,10 @@
 from flask import Flask, request, jsonify
 import psycopg2
 from flask_cors import CORS, cross_origin
+import time
 
 app = Flask(__name__)
-CORS(app, resources={r"/*": {"origins": ["http://127.0.0.1:5500", "http://localhost:5500"]}})  # Allow local origins
+CORS(app, resources={r"/*": {"origins": ["http://127.0.0.1:8000", "http://localhost:8000"]}})  # Allow local origins
 
 # PostgreSQL Datenbank Konfiguration
 DB_CONFIG = {
@@ -27,7 +28,7 @@ def get_db_connection():
 conn = get_db_connection()  # Verbindung zur Datenbank herstellen
 
 @app.route('/search', methods=['GET'])  # GET Methode für die Suchfunktion
-@cross_origin(origins=["http://127.0.0.1:5500", "http://localhost:5500"])  # Enable CORS for this route
+@cross_origin(origins=["http://127.0.0.1:8000", "http://localhost:8000"])  # Enable CORS for this route
 def search():
     if not conn:
         return jsonify({"error": "Database connection failed"}), 500  # Fehlermeldung, wenn keine Verbindung zur Datenbank besteht
@@ -40,14 +41,16 @@ def search():
     ingredients = [ing.strip() for ing in ingredient_str.split(',')]  # Suchparameter in eine Liste umwandeln
 
     try:
-        # Optimierte SQL-Abfrage
+        start_time = time.time()
+        
+        # SQL-Abfrage: Use ILIKE for case-insensitive pattern matching
         query = """
             SELECT title, ingredients, directions
             FROM recipes
             WHERE ingredients ILIKE ALL (%s)
             LIMIT 5
         """
-        ingredients_array = [f"%{ingredient}%" for ingredient in ingredients]  # Array mit Suchparametern erstellen
+        ingredients_array = [f"%{ingredient}%" for ingredient in ingredients]  # Add wildcards for pattern matching
         cursor = conn.cursor()  # Cursor erstellen
         cursor.execute(query, (ingredients_array,))  # SQL-Abfrage ausführen
         results = cursor.fetchall()  # Ergebnisse abrufen
@@ -60,9 +63,13 @@ def search():
             {"title": row[0], "ingredients": row[1], "directions": row[2]} 
             for row in results
         ]
+        
+        end_time = time.time()  # Capture the end time of the query execution
+        execution_time = end_time - start_time  # Calculate the execution time
+        print(f"Query executed in {execution_time:.4f} seconds.")  # Log the execution time
+        
         return jsonify({"recipes": recipes}), 200
 
-    # Fehlerbehandlung
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 

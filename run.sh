@@ -3,7 +3,7 @@
 # HTML-Datei zum Servieren
 HTML_FILE="index.html"
 HTML_DIR="/Users/bruno/inf_abschluss/frontend" # Verzeichnis der HTML-Datei
-PORT=5500 # Port für den HTTP-Server
+PORT=8000 # Port für den HTTP-Server
 FLASK_APP_PATH="/Users/bruno/inf_abschluss/api/main.py"
 
 # Funktion für Fehlerausgabe
