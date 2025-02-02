@@ -3,7 +3,7 @@
 # Recipe API and Web Interface
 
 **Author1:** Bruno Welsch / 2170527  
-**Video:** URL oder "VC"  
+**Video:** https://youtu.be/0iYLO5POTIE
 
 ### Informationen zum Projekt:  
 Ziel des Projektes war es, ausgehend von einer relativ großen CSV-Datei mit ca 2 Millionen Rezepten, eine API zu erstellen, die anhand von übergebenen Zutaten passende bzw. möglichst gut passende Rezepte findet und zurückgibt. Um dies zu realisieren, habe ich zuerst mit der Recherche begonnen, welche Programmiersprachen und Frameworks sich am besten für mein Projekt eignen. Am Ende ist die Entscheidung auf Python mit Flask für die API gefallen. Als dazugehörige Datenbank habe ich mich für PostgreSQL entschieden, weil hier die Einbindung in Python in Kombination mit Flask gute Anleitungen finden konnte. Die Webanwendung basiert auf HTML, JS und CSS, da ich hier zumindest schon grundlegende Erfahrungen hatte. Anzumerken ist, dass ich das Projekt bereits Ende Dezember fast fertiggestellt hatte. Durch neu gelernte Methodik aus den Vorlesungen würde ich einige Design-Entscheidungen noch einmal überdenken.  
