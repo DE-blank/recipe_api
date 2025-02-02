@@ -1,7 +1,6 @@
 from flask import Flask, request, jsonify
 import psycopg2
 from flask_cors import CORS, cross_origin
-import time
 
 app = Flask(__name__)
 CORS(app, resources={r"/*": {"origins": ["http://127.0.0.1:8000", "http://localhost:8000"]}})  # Allow local origins
@@ -15,7 +14,7 @@ DB_CONFIG = {
     "port": "5432"
 }
 
-# Funktion um eine Verbindung zur Datenbank herzustellen
+# Verbindung zur Datenbank herstellen
 def get_db_connection():
     try:
         conn = psycopg2.connect(**DB_CONFIG)
@@ -41,8 +40,6 @@ def search():
     ingredients = [ing.strip() for ing in ingredient_str.split(',')]  # Suchparameter in eine Liste umwandeln
 
     try:
-        start_time = time.time()
-        
         # SQL-Abfrage: Use ILIKE for case-insensitive pattern matching
         query = """
             SELECT title, ingredients, directions
@@ -50,7 +47,7 @@ def search():
             WHERE ingredients ILIKE ALL (%s)
             LIMIT 5
         """
-        ingredients_array = [f"%{ingredient}%" for ingredient in ingredients]  # Add wildcards for pattern matching
+        ingredients_array = [f"%{ingredient}%" for ingredient in ingredients]  
         cursor = conn.cursor()  # Cursor erstellen
         cursor.execute(query, (ingredients_array,))  # SQL-Abfrage ausführen
         results = cursor.fetchall()  # Ergebnisse abrufen
@@ -63,10 +60,6 @@ def search():
             {"title": row[0], "ingredients": row[1], "directions": row[2]} 
             for row in results
         ]
-        
-        end_time = time.time()  # Capture the end time of the query execution
-        execution_time = end_time - start_time  # Calculate the execution time
-        print(f"Query executed in {execution_time:.4f} seconds.")  # Log the execution time
         
         return jsonify({"recipes": recipes}), 200
 
