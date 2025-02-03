@@ -14,7 +14,7 @@ DB_CONFIG = {
     "port": "5432"
 }
 
-# Verbindung zur Datenbank herstellen
+# Methode um Verbindung zur Datenbank herstellen
 def get_db_connection():
     try:
         conn = psycopg2.connect(**DB_CONFIG)
@@ -40,7 +40,7 @@ def search():
     ingredients = [ing.strip() for ing in ingredient_str.split(',')]  # Suchparameter in eine Liste umwandeln
 
     try:
-        # SQL-Abfrage: Use ILIKE for case-insensitive pattern matching
+        # SQL-Abfrage: 
         query = """
             SELECT title, ingredients, directions
             FROM recipes

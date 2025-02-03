@@ -4,14 +4,14 @@ async function fetchData() {
   const resultsContainer = document.getElementById('results');
   const input = document.getElementById('input').value.toLowerCase().replace(/\s+/g, '');
 
-  // Disable the search button and show loading spinner
+  // Eingabe Sperren
   searchButton.disabled = true;
   searchButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Searching...';
 
   try {
     const response = await fetch(`http://127.0.0.1:5000/search?ingredients=${input}`);
     
-    // Log response status for debugging
+    // Ausgabe des Antwortstatus
     console.log('Response status:', response.status);
 
     if (!response.ok) {
@@ -20,12 +20,10 @@ async function fetchData() {
 
     const data = await response.json();
 
-    // Log response data for debugging
-    console.log('Response data:', data);
 
-    // Clear previous results
+    // Vorherige Suchergebnisse löschen
     resultsContainer.innerHTML = '';
-
+    // Neue Suchergebnisse anzeigen
     if (data.recipes && Array.isArray(data.recipes) && data.recipes.length > 0) {
       data.recipes.forEach(recipe => {
         const recipeElement = document.createElement('div');
@@ -62,23 +60,23 @@ async function fetchData() {
     }
   } catch (error) {
     console.error('Error fetching data:', error);
-    // Extend spinner animation duration and delay error message
+    // Animation verlängern bei Fehler Meldung
     searchButton.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Searching...';
-    await new Promise(resolve => setTimeout(resolve, 3000)); // Extend duration by 3 seconds
+    await new Promise(resolve => setTimeout(resolve, 2500));
     resultsContainer.innerHTML = '<p>Error fetching data. Please try again later.</p>';
   } finally {
-    // Re-enable the search button and reset its content
+    // Wieder Aktivieren des Suchbuttons
     searchButton.disabled = false;
     searchButton.innerHTML = '<i class="fas fa-search"></i> Search';
   }
 }
 
-// Add event listener to the input field to trigger search on Enter key press
+// Event Listener für Enter Taste
 document.getElementById('input').addEventListener('keypress', function(event) {
   if (event.key === 'Enter') {
     fetchData();
   }
 });
 
-// Add event listener to the search button to trigger search on click
+// Event Listener für Suchbutton
 document.querySelector('button').addEventListener('click', fetchData);
