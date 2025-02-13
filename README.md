@@ -1,5 +1,3 @@
-[[00300 Index Einführung Informatik]]
-
 # Recipe API and Web Interface
 
 **Author1:** Bruno Welsch / 2170527  
