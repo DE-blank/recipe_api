@@ -37,3 +37,5 @@ Bei der Erstellung dieser Datei habe ich an vielen Stellen auf KI zurückgegriff
 
 ##### run.sh  
 Hierbei handelt es sich einfach um ein Bash-Skript, das die gesamte Anwendung startet, wie oben beschrieben.  
+
+# Disclaimer: Parts of this project were generated with the assistance of AI.
